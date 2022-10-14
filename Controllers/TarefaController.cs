@@ -25,7 +25,7 @@ namespace TrilhaApiDesafio.Controllers
             var tarefa = _context.Tarefas.Find(id);
 
             if (tarefa == null)
-                return NotFound(tarefa);
+                return NotFound();
             return Ok(tarefa);
         }
 
@@ -43,7 +43,7 @@ namespace TrilhaApiDesafio.Controllers
         {
             // TODO: Buscar  as tarefas no banco utilizando o EF, que contenha o titulo recebido por parâmetro
             // Dica: Usar como exemplo o endpoint ObterPorData
-            var tarefa = _context.T
+            var tarefa = _context.Tarefas.Where(x => x.Titulo == titulo);
 
             return Ok();
         }
@@ -71,6 +71,7 @@ namespace TrilhaApiDesafio.Controllers
                 return BadRequest(new { Erro = "A data da tarefa não pode ser vazia" });
 
             // TODO: Adicionar a tarefa recebida no EF e salvar as mudanças (save changes)
+            
             return CreatedAtAction(nameof(ObterPorId), new { id = tarefa.Id }, tarefa);
         }
 
